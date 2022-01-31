@@ -1,16 +1,48 @@
+import Amplify, { API } from "aws-amplify"
+import config from "../../aws-exports"
 import ResponsiveAppBar from "../../components/ResponsiveAppBar"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { getMovieByTitle } from "../../utils/api-util"
+import { createMovieData } from "../../graphql/mutations"
+
+Amplify.configure(config)
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
 const MovieList = (props) => {
 
     const { movie } = props
 
-    const handleSaveMovie = () => {
-        console.log("Gonna save this movie eventually")
+    const handleSaveMovie = async () => {
+      console.log(`Gonna save the movie ${movie.Title} now...`)
+      const newMovieToSave = {
+        title: movie.Title,
+        year: movie.Year,
+        released: movie.Released,
+        runtime: movie.Runtime,
+        genre: movie.Genre,
+        director: movie.Director,
+        writer: movie.Writer,
+        actors: movie.Actors,
+        plot: movie.Plot,
+        poster: movie.Poster,
+        metascore: movie.Metascore,
+        dvd: movie.DVD,
+        boxOffice: movie.BoxOffice,
+      }
+
+      try {
+        const response = await API.graphql({
+          query: createMovieData,
+          variables: { input: newMovieToSave },
+          authMode: 'API_KEY'
+        })
+        console.log('Created a new movie')
+        console.log(response)
+      } catch (err) {
+        console.log("Save movie error", err)
+      }
     }
 
     const handleDeleteMovie = () => {
@@ -52,7 +84,7 @@ const MovieList = (props) => {
 
 // 1. Nextjs will execute this function first.  It is never visible to the client!
 export async function getStaticProps() {
-    const fetchedMovie = await getMovieByTitle('Thor')
+    const fetchedMovie = await getMovieByTitle('Hulk')
 
     return {
         props: {
