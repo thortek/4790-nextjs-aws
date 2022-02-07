@@ -1,5 +1,62 @@
 export const schema = {
     "models": {
+        "Rating": {
+            "name": "Rating",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "source": {
+                    "name": "source",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "value": {
+                    "name": "value",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "movieDataRatingsId": {
+                    "name": "movieDataRatingsId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "Ratings",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                }
+            ]
+        },
         "MovieData": {
             "name": "MovieData",
             "fields": {
@@ -103,12 +160,17 @@ export const schema = {
                 },
                 "ratings": {
                     "name": "ratings",
-                    "isArray": false,
+                    "isArray": true,
                     "type": {
-                        "nonModel": "Rating"
+                        "model": "Rating"
                     },
                     "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "movieDataRatingsId"
+                    }
                 },
                 "metascore": {
                     "name": "metascore",
@@ -224,26 +286,6 @@ export const schema = {
         }
     },
     "enums": {},
-    "nonModels": {
-        "Rating": {
-            "name": "Rating",
-            "fields": {
-                "source": {
-                    "name": "source",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "value": {
-                    "name": "value",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                }
-            }
-        }
-    },
-    "version": "6885343d3bf250eb123d3ca6c1d798ce"
+    "nonModels": {},
+    "version": "9321136a4136a79bfd74bbf165fac3c1"
 };

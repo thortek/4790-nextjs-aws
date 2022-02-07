@@ -84,7 +84,7 @@ const MovieList = (props) => {
 
 // 1. Nextjs will execute this function first.  It is never visible to the client!
 export async function getStaticProps() {
-    const fetchedMovie = await getMovieByTitle('Hulk')
+    const fetchedMovie = await getMovieByTitle('Gravity')
 
     return {
         props: {

@@ -1,6 +1,60 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createRating = /* GraphQL */ `
+  mutation CreateRating(
+    $input: CreateRatingInput!
+    $condition: ModelRatingConditionInput
+  ) {
+    createRating(input: $input, condition: $condition) {
+      source
+      value
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      movieDataRatingsId
+    }
+  }
+`;
+export const updateRating = /* GraphQL */ `
+  mutation UpdateRating(
+    $input: UpdateRatingInput!
+    $condition: ModelRatingConditionInput
+  ) {
+    updateRating(input: $input, condition: $condition) {
+      source
+      value
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      movieDataRatingsId
+    }
+  }
+`;
+export const deleteRating = /* GraphQL */ `
+  mutation DeleteRating(
+    $input: DeleteRatingInput!
+    $condition: ModelRatingConditionInput
+  ) {
+    deleteRating(input: $input, condition: $condition) {
+      source
+      value
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      movieDataRatingsId
+    }
+  }
+`;
 export const createMovieData = /* GraphQL */ `
   mutation CreateMovieData(
     $input: CreateMovieDataInput!
@@ -22,8 +76,8 @@ export const createMovieData = /* GraphQL */ `
       awards
       poster
       ratings {
-        source
-        value
+        nextToken
+        startedAt
       }
       metascore
       imdbRating
@@ -64,8 +118,8 @@ export const updateMovieData = /* GraphQL */ `
       awards
       poster
       ratings {
-        source
-        value
+        nextToken
+        startedAt
       }
       metascore
       imdbRating
@@ -106,8 +160,8 @@ export const deleteMovieData = /* GraphQL */ `
       awards
       poster
       ratings {
-        source
-        value
+        nextToken
+        startedAt
       }
       metascore
       imdbRating

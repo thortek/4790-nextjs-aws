@@ -1,6 +1,73 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getRating = /* GraphQL */ `
+  query GetRating($id: ID!) {
+    getRating(id: $id) {
+      source
+      value
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      movieDataRatingsId
+    }
+  }
+`;
+export const listRatings = /* GraphQL */ `
+  query ListRatings(
+    $filter: ModelRatingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listRatings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        source
+        value
+        id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        movieDataRatingsId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncRatings = /* GraphQL */ `
+  query SyncRatings(
+    $filter: ModelRatingFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncRatings(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        source
+        value
+        id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        movieDataRatingsId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getMovieData = /* GraphQL */ `
   query GetMovieData($id: ID!) {
     getMovieData(id: $id) {
@@ -19,8 +86,8 @@ export const getMovieData = /* GraphQL */ `
       awards
       poster
       ratings {
-        source
-        value
+        nextToken
+        startedAt
       }
       metascore
       imdbRating

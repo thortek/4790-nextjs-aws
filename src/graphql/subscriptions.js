@@ -1,6 +1,51 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateRating = /* GraphQL */ `
+  subscription OnCreateRating {
+    onCreateRating {
+      source
+      value
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      movieDataRatingsId
+    }
+  }
+`;
+export const onUpdateRating = /* GraphQL */ `
+  subscription OnUpdateRating {
+    onUpdateRating {
+      source
+      value
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      movieDataRatingsId
+    }
+  }
+`;
+export const onDeleteRating = /* GraphQL */ `
+  subscription OnDeleteRating {
+    onDeleteRating {
+      source
+      value
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      movieDataRatingsId
+    }
+  }
+`;
 export const onCreateMovieData = /* GraphQL */ `
   subscription OnCreateMovieData {
     onCreateMovieData {
@@ -19,8 +64,8 @@ export const onCreateMovieData = /* GraphQL */ `
       awards
       poster
       ratings {
-        source
-        value
+        nextToken
+        startedAt
       }
       metascore
       imdbRating
@@ -58,8 +103,8 @@ export const onUpdateMovieData = /* GraphQL */ `
       awards
       poster
       ratings {
-        source
-        value
+        nextToken
+        startedAt
       }
       metascore
       imdbRating
@@ -97,8 +142,8 @@ export const onDeleteMovieData = /* GraphQL */ `
       awards
       poster
       ratings {
-        source
-        value
+        nextToken
+        startedAt
       }
       metascore
       imdbRating

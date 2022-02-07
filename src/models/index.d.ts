@@ -2,14 +2,25 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-export declare class Rating {
-  readonly source?: string;
-  readonly value?: string;
-  constructor(init: ModelInit<Rating>);
+
+
+type RatingMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
 type MovieDataMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+export declare class Rating {
+  readonly id: string;
+  readonly source?: string;
+  readonly value?: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  readonly movieDataRatingsId?: string;
+  constructor(init: ModelInit<Rating, RatingMetaData>);
+  static copyOf(source: Rating, mutator: (draft: MutableModel<Rating, RatingMetaData>) => MutableModel<Rating, RatingMetaData> | void): Rating;
 }
 
 export declare class MovieData {
@@ -27,7 +38,7 @@ export declare class MovieData {
   readonly country?: string;
   readonly awards?: string;
   readonly poster?: string;
-  readonly ratings?: Rating;
+  readonly ratings?: (Rating | null)[];
   readonly metascore?: string;
   readonly imdbRating?: string;
   readonly imdbVotes?: string;

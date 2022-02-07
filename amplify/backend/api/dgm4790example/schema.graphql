@@ -1,4 +1,4 @@
-type Rating {
+type Rating @model {
   source: String
   value: String
 }
@@ -18,7 +18,7 @@ type MovieData @model @auth(rules: [{allow: public}]) {
   country: String
   awards: String
   poster: String
-  ratings: Rating
+  ratings: [Rating] @hasMany
   metascore: String
   imdbRating: String
   imdbVotes: String
