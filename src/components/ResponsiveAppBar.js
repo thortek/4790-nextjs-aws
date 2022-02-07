@@ -11,18 +11,32 @@ import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
-
+import TextField from '@mui/material/TextField'
+import SearchIcon from '@mui/icons-material/Search'
+import { getMovieByTitle } from "../utils/api-util"
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [fetchedMovie, setFetchedMovie] = React.useState({})
+  const [searchTerms, setSearchTerms] = React.useState("")
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)
   }
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
+  }
+
+  const handleChange = (event) => {
+    setSearchTerms(event.target.value)
+  }
+
+  const handleSearch = async () => {
+    const omdbMovie = await getMovieByTitle(searchTerms)
+    setFetchedMovie(omdbMovie)
+    console.log(omdbMovie)
   }
 
   return (
@@ -36,6 +50,21 @@ const ResponsiveAppBar = () => {
               </Button>
             </Tooltip>
           </Box>
+
+          <Box>
+            <IconButton onClick={handleSearch}>
+              <SearchIcon />
+            </IconButton>
+          <TextField
+            size="small"
+            label="Search"
+            variant="outlined"
+              onChange={handleChange}
+              value={searchTerms}
+            sx={{ backgroundColor: 'white', flexGrow: 2, mr: 20}}
+            />
+          </Box>
+          
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
