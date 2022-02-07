@@ -6,13 +6,16 @@ import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { getMovieByTitle } from "../../utils/api-util"
 import { createMovieData } from "../../graphql/mutations"
+import { listMovieData } from "../../graphql/queries"
 
 Amplify.configure(config)
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
 const MovieList = (props) => {
 
-    const { movie } = props
+    const { movieList } = props
+
+    console.log(movieList)
 
     const handleSaveMovie = async () => {
       console.log(`Gonna save the movie ${movie.Title} now...`)
@@ -52,19 +55,20 @@ const MovieList = (props) => {
     return (
         <>
             <ResponsiveAppBar />
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Card sx={{ maxWidth: 400 }}>
-                    <CardMedia component='img' image={movie.Poster} title={movie.Title} />
+            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                {movieList.map((movie) => (
+                    <Card key={movie.id} sx={{ maxWidth: 400, m: 1 }}>
+                    <CardMedia component='img' image={movie.poster} title={movie.title} />
                     <CardContent>
                         <Box>
                             <Typography variant='subtitle1' color='textSecondary'>
-                                Year: {movie.Year}
+                                Year: {movie.year}
                             </Typography>
                             <Typography variant='subtitle1' color='textSecondary'>
-                                Rating: {movie.Rated}
+                                Rating: {movie.rated}
                             </Typography>
                             <Typography variant='subtitle2' color='textSecondary'>
-                                Plot: {movie.Plot}
+                                Plot: {movie.plot}
                             </Typography>
                         </Box>
                     </CardContent>
@@ -77,6 +81,7 @@ const MovieList = (props) => {
                         </IconButton>
                     </CardActions>
                 </Card>
+            ))}
             </Box>
         </>
     )
@@ -84,13 +89,30 @@ const MovieList = (props) => {
 
 // 1. Nextjs will execute this function first.  It is never visible to the client!
 export async function getStaticProps() {
-    const fetchedMovie = await getMovieByTitle('Gravity')
+    let movieList = []
+    try {
+        const response = await API.graphql({
+          query: listMovieData,
+          authMode: 'API_KEY'
+        })
+        movieList = response.data.listMovieData.items
+
+      } catch (err) {
+        console.log("Retrieve movie list error", err)
+    }
+    return {
+        props: {
+            movieList: movieList
+        }
+    }
+
+/*     const fetchedMovie = await getMovieByTitle('Gravity')
 
     return {
         props: {
             movie: fetchedMovie
         }
-    }
+    } */
 }
 
 export default MovieList
