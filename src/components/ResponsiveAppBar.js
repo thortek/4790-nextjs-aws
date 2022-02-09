@@ -1,4 +1,6 @@
 import * as React from 'react'
+import Amplify, {API} from 'aws-amplify'
+import config from '../aws-exports'
 import Link from 'next/link'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -14,6 +16,10 @@ import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search'
 import { getMovieByTitle } from "../utils/api-util"
+import { createMovieData } from '../graphql/mutations'
+import MovieFoundDialog from './MovieFoundDialog'
+
+Amplify.configure(config)
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
@@ -21,6 +27,10 @@ const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null)
   const [fetchedMovie, setFetchedMovie] = React.useState({})
   const [searchTerms, setSearchTerms] = React.useState("")
+  const [dialog, setDialog] = React.useState({
+    isOpen: false,
+    movie: undefined,
+  })
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)
@@ -37,9 +47,48 @@ const ResponsiveAppBar = () => {
     const omdbMovie = await getMovieByTitle(searchTerms)
     setFetchedMovie(omdbMovie)
     console.log(omdbMovie)
+    setDialog({
+      isOpen: true,
+      movie: fetchedMovie,
+    })
+  }
+
+  const handleSaveMovie = async () => {
+    const newMovieToSave = {
+      title: fetchedMovie.Title,
+      year: fetchedMovie.Year,
+      released: fetchedMovie.Released,
+      runtime: fetchedMovie.Runtime,
+      genre: fetchedMovie.Genre,
+      director: fetchedMovie.Director,
+      writer: fetchedMovie.Writer,
+      actors: fetchedMovie.Actors,
+      plot: fetchedMovie.Plot,
+      poster: fetchedMovie.Poster,
+      metascore: fetchedMovie.Metascore,
+      dvd: fetchedMovie.DVD,
+      boxOffice: fetchedMovie.BoxOffice,
+    }
+    try {
+      const response = await API.graphql({
+        query: createMovieData,
+        variables: { input: newMovieToSave},
+        authMode: 'API_KEY'
+      })
+      console.log('Movie was saved!')
+    } catch (err) {
+      console.log("Save movie error ", err)
+    }
+  }
+
+  const handleCloseDialog = () => {
+    setDialog({
+      isOpen: false
+    })
   }
 
   return (
+    <>
     <AppBar position='static'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
@@ -100,6 +149,8 @@ const ResponsiveAppBar = () => {
         </Toolbar>
       </Container>
     </AppBar>
+    <MovieFoundDialog open={dialog.isOpen} movie={fetchedMovie} onClose={handleCloseDialog} onSaveMovie={handleSaveMovie}/>
+    </>
   )
 }
 export default ResponsiveAppBar

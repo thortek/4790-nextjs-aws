@@ -2,7 +2,6 @@ import Amplify, { API } from "aws-amplify"
 import config from "../../aws-exports"
 import ResponsiveAppBar from "../../components/ResponsiveAppBar"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
-import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { createMovieData } from "../../graphql/mutations"
 import { listMovieData } from "../../graphql/queries"
@@ -72,9 +71,6 @@ const MovieList = (props) => {
                         </Box>
                     </CardContent>
                     <CardActions>
-                        <IconButton aria-label="save" onClick={handleSaveMovie}>
-                            <SaveIcon/>
-                        </IconButton>
                         <IconButton aria-label="delete" onClick={handleDeleteMovie}>
                             <DeleteIcon/>
                         </IconButton>
