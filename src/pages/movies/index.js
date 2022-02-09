@@ -57,7 +57,8 @@ export async function getStaticProps() {
     return {
         props: {
             movie: fetchedMovie
-        }
+        },
+        revalidate: 30
     }
 }
 
