@@ -2,9 +2,7 @@ import Amplify, { API } from "aws-amplify"
 import config from "../../aws-exports"
 import ResponsiveAppBar from "../../components/ResponsiveAppBar"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
-import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { createMovieData } from "../../graphql/mutations"
 import { listMovieData } from "../../graphql/queries"
 
 Amplify.configure(config)
@@ -16,37 +14,6 @@ const MovieList = (props) => {
 
     console.log(movieList)
 
-    const handleSaveMovie = async () => {
-      console.log(`Gonna save the movie ${movie.Title} now...`)
-      const newMovieToSave = {
-        title: movie.Title,
-        year: movie.Year,
-        released: movie.Released,
-        runtime: movie.Runtime,
-        genre: movie.Genre,
-        director: movie.Director,
-        writer: movie.Writer,
-        actors: movie.Actors,
-        plot: movie.Plot,
-        poster: movie.Poster,
-        metascore: movie.Metascore,
-        dvd: movie.DVD,
-        boxOffice: movie.BoxOffice,
-      }
-
-      try {
-        const response = await API.graphql({
-          query: createMovieData,
-          variables: { input: newMovieToSave },
-          authMode: 'API_KEY'
-        })
-        console.log('Created a new movie')
-        console.log(response)
-      } catch (err) {
-        console.log("Save movie error", err)
-      }
-    }
-
     const handleDeleteMovie = () => {
         console.log("Got to delete this movie")
     }
@@ -56,7 +23,7 @@ const MovieList = (props) => {
             <ResponsiveAppBar />
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                 {movieList.map((movie) => (
-                    <Card key={movie.id} sx={{ maxWidth: 400, m: 1 }}>
+                    <Card key={movie.id} sx={{ maxWidth: 200, m: 1 }}>
                     <CardMedia component='img' image={movie.poster} title={movie.title} />
                     <CardContent>
                         <Box>
@@ -64,17 +31,11 @@ const MovieList = (props) => {
                                 Year: {movie.year}
                             </Typography>
                             <Typography variant='subtitle1' color='textSecondary'>
-                                Rating: {movie.rated}
-                            </Typography>
-                            <Typography variant='subtitle2' color='textSecondary'>
-                                Plot: {movie.plot}
+                                Director: {movie.director}
                             </Typography>
                         </Box>
                     </CardContent>
                     <CardActions>
-                        <IconButton aria-label="save" onClick={handleSaveMovie}>
-                            <SaveIcon/>
-                        </IconButton>
                         <IconButton aria-label="delete" onClick={handleDeleteMovie}>
                             <DeleteIcon/>
                         </IconButton>
@@ -102,7 +63,8 @@ export async function getStaticProps() {
     return {
         props: {
             movieList: movieList
-        }
+        },
+        revalidate: 10
     }
 }
 
