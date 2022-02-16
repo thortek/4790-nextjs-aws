@@ -68,6 +68,8 @@ const ResponsiveAppBar = () => {
       metascore: fetchedMovie.Metascore,
       dvd: fetchedMovie.DVD,
       boxOffice: fetchedMovie.BoxOffice,
+      rated: fetchedMovie.Rated,
+      // ratings: new Map(fetchedMovie.Ratings)
     }
     try {
       const response = await API.graphql({
@@ -78,6 +80,10 @@ const ResponsiveAppBar = () => {
       console.log('Movie was saved!')
     } catch (err) {
       console.log("Save movie error ", err)
+    } finally {
+      setDialog({
+        isOpen: false
+      })
     }
   }
 

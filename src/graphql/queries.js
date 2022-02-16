@@ -74,6 +74,7 @@ export const getMovieData = /* GraphQL */ `
       id
       title
       year
+      rated
       released
       runtime
       genre
@@ -118,6 +119,7 @@ export const listMovieData = /* GraphQL */ `
         id
         title
         year
+        rated
         released
         runtime
         genre
@@ -167,6 +169,7 @@ export const syncMovieData = /* GraphQL */ `
         id
         title
         year
+        rated
         released
         runtime
         genre

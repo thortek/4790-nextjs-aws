@@ -81,6 +81,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "rated": {
+                    "name": "rated",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "released": {
                     "name": "released",
                     "isArray": false,
@@ -265,27 +272,11 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
                 }
             ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "9321136a4136a79bfd74bbf165fac3c1"
+    "version": "6079a81324ee47d6d6ddbb42b7d77868"
 };

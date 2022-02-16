@@ -55,8 +55,8 @@ const MovieList = (props) => {
             <ResponsiveAppBar />
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                 {movieList.map((movie) => (
-                    <Card key={movie.id} sx={{ maxWidth: 400, m: 1 }}>
-                    <CardMedia component='img' image={movie.poster} title={movie.title} />
+                    <Card key={movie.id} sx={{ width: 400, m: 1 }}>
+                    <CardMedia sx={{maxWidth: 400, maxHeight: 600}} component='img' image={movie.poster} title={movie.title} />
                     <CardContent>
                         <Box>
                             <Typography variant='subtitle1' color='textSecondary'>
@@ -98,7 +98,8 @@ export async function getStaticProps() {
     return {
         props: {
             movieList: movieList
-        }
+        },
+        revalidate: 10
     }
 }
 
