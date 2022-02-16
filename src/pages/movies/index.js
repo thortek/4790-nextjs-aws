@@ -55,9 +55,9 @@ const MovieList = (props) => {
             <ResponsiveAppBar />
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                 {movieList.map((movie) => (
-                    <Card key={movie.id} sx={{ maxWidth: 400, m: 1 }}>
-                    <CardMedia component='img' image={movie.poster} title={movie.title} />
-                    <CardContent>
+                    <Card key={movie.id} sx={{ maxWidth: 200, m: 1 }}>
+                    <CardMedia component='img' image={movie.poster} title={movie.title} height='300' />
+                    <CardContent >
                         <Box>
                             <Typography variant='subtitle1' color='textSecondary'>
                                 Year: {movie.year}
@@ -66,7 +66,7 @@ const MovieList = (props) => {
                                 Rating: {movie.rated}
                             </Typography>
                             <Typography variant='subtitle2' color='textSecondary'>
-                                Plot: {movie.plot}
+                                Director: {movie.director}
                             </Typography>
                         </Box>
                     </CardContent>

@@ -27,6 +27,7 @@ export declare class MovieData {
   readonly id: string;
   readonly title?: string;
   readonly year?: string;
+  readonly rated?: string;
   readonly released?: string;
   readonly runtime?: string;
   readonly genre?: string;
