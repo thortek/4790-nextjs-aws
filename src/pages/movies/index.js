@@ -98,7 +98,8 @@ export async function getStaticProps() {
     return {
         props: {
             movieList: movieList
-        }
+        },
+        revalidate: 10
     }
 }
 

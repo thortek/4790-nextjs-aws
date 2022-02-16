@@ -52,6 +52,7 @@ export const onCreateMovieData = /* GraphQL */ `
       id
       title
       year
+      rated
       released
       runtime
       genre
@@ -91,6 +92,7 @@ export const onUpdateMovieData = /* GraphQL */ `
       id
       title
       year
+      rated
       released
       runtime
       genre
@@ -130,6 +132,7 @@ export const onDeleteMovieData = /* GraphQL */ `
       id
       title
       year
+      rated
       released
       runtime
       genre
