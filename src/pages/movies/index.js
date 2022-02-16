@@ -31,6 +31,7 @@ const MovieList = (props) => {
         metascore: movie.Metascore,
         dvd: movie.DVD,
         boxOffice: movie.BoxOffice,
+        rated: movie.Rated
       }
 
       try {
