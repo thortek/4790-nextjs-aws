@@ -3,7 +3,7 @@ import config from "../../aws-exports"
 import ResponsiveAppBar from "../../components/ResponsiveAppBar"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { createMovieData } from "../../graphql/mutations"
+import { createMovieData, deleteMovieData } from "../../graphql/mutations"
 import { listMovieData } from "../../graphql/queries"
 
 Amplify.configure(config)
@@ -47,8 +47,18 @@ const MovieList = (props) => {
       }
     }
 
-    const handleDeleteMovie = () => {
-        console.log("Got to delete this movie")
+    const handleDeleteMovie = async (movie) => {
+      console.log(movie)
+        try {
+          const response = await API.graphql({
+            query: deleteMovieData,
+            variables: { input: { id: movie.id, _version: movie._version } },
+            authMode: 'API_KEY'
+          })
+          console.log(response)
+        } catch (err) {
+          console.log("Save delete movie error: ", err)
+        }
     }
 
     return (
@@ -72,7 +82,7 @@ const MovieList = (props) => {
                         </Box>
                     </CardContent>
                     <CardActions>
-                        <IconButton aria-label="delete" onClick={handleDeleteMovie}>
+                        <IconButton aria-label="delete" onClick={() => handleDeleteMovie(movie)}>
                             <DeleteIcon/>
                         </IconButton>
                     </CardActions>

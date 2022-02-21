@@ -5,7 +5,8 @@ import {
   CardMedia,
   Dialog,
   Typography,
-  CardActions,
+  DialogContent,
+  DialogActions,
   IconButton,
 } from '@mui/material'
 import SaveIcon from '@mui/icons-material/Save'
@@ -14,8 +15,9 @@ const MovieFoundDialog = (props) => {
   const { open, movie, onSaveMovie, onClose } = props
 
   return (
-    <Dialog maxWidth="sm" open={open} onClose={onClose}>
-      <Card key={movie.id} sx={{ maxWidth: 300, m: 1 }}>
+    <Dialog maxWidth="sm" open={open} onClose={onClose} scroll='paper'>
+      <DialogContent sx={{ m: 0}}>
+      <Card key={movie.id} sx={{ maxWidth: 300 }}>
         <CardMedia component="img" image={movie.Poster} title={movie.Title} />
         <CardContent>
           <Box>
@@ -30,12 +32,13 @@ const MovieFoundDialog = (props) => {
             </Typography>
           </Box>
         </CardContent>
-        <CardActions>
+      </Card>
+      </DialogContent>
+      <DialogActions>
           <IconButton aria-label="save movie" onClick={onSaveMovie}>
             <SaveIcon />
           </IconButton>
-        </CardActions>
-      </Card>
+        </DialogActions>
     </Dialog>
   )
 }
