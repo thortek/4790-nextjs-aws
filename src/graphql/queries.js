@@ -4,9 +4,9 @@
 export const getRating = /* GraphQL */ `
   query GetRating($id: ID!) {
     getRating(id: $id) {
+      id
       source
       value
-      id
       createdAt
       updatedAt
       _version
@@ -24,9 +24,9 @@ export const listRatings = /* GraphQL */ `
   ) {
     listRatings(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         source
         value
-        id
         createdAt
         updatedAt
         _version
@@ -53,9 +53,9 @@ export const syncRatings = /* GraphQL */ `
       lastSync: $lastSync
     ) {
       items {
+        id
         source
         value
-        id
         createdAt
         updatedAt
         _version

@@ -7,9 +7,9 @@ export const createRating = /* GraphQL */ `
     $condition: ModelRatingConditionInput
   ) {
     createRating(input: $input, condition: $condition) {
+      id
       source
       value
-      id
       createdAt
       updatedAt
       _version
@@ -25,9 +25,9 @@ export const updateRating = /* GraphQL */ `
     $condition: ModelRatingConditionInput
   ) {
     updateRating(input: $input, condition: $condition) {
+      id
       source
       value
-      id
       createdAt
       updatedAt
       _version
@@ -43,9 +43,9 @@ export const deleteRating = /* GraphQL */ `
     $condition: ModelRatingConditionInput
   ) {
     deleteRating(input: $input, condition: $condition) {
+      id
       source
       value
-      id
       createdAt
       updatedAt
       _version

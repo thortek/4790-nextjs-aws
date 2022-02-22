@@ -4,9 +4,9 @@
 export const onCreateRating = /* GraphQL */ `
   subscription OnCreateRating {
     onCreateRating {
+      id
       source
       value
-      id
       createdAt
       updatedAt
       _version
@@ -19,9 +19,9 @@ export const onCreateRating = /* GraphQL */ `
 export const onUpdateRating = /* GraphQL */ `
   subscription OnUpdateRating {
     onUpdateRating {
+      id
       source
       value
-      id
       createdAt
       updatedAt
       _version
@@ -34,9 +34,9 @@ export const onUpdateRating = /* GraphQL */ `
 export const onDeleteRating = /* GraphQL */ `
   subscription OnDeleteRating {
     onDeleteRating {
+      id
       source
       value
-      id
       createdAt
       updatedAt
       _version

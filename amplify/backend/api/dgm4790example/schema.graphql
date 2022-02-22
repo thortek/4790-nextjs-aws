@@ -3,6 +3,7 @@ input AMPLIFY {
 }
 
 type Rating @model {
+  id: ID!
   source: String
   value: String
 }
