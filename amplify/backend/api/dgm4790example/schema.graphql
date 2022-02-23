@@ -2,12 +2,6 @@ input AMPLIFY {
   globalAuthRule: AuthRule = {allow: public}
 }
 
-type Rating @model {
-  id: ID!
-  source: String
-  value: String
-}
-
 type MovieData @model {
   id: ID!
   title: String
@@ -24,7 +18,6 @@ type MovieData @model {
   country: String
   awards: String
   poster: String
-  ratings: [Rating] @hasMany
   metascore: String
   imdbRating: String
   imdbVotes: String
