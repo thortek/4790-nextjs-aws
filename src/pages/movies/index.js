@@ -1,21 +1,24 @@
-import Amplify, { API } from "aws-amplify"
+import * as React from 'react'
+import Amplify, { DataStore } from "aws-amplify"
+import useSWR from "swr"
+import { MovieData } from '../../models'
 import config from "../../aws-exports"
 import ResponsiveAppBar from "../../components/ResponsiveAppBar"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { createMovieData, deleteMovieData } from "../../graphql/mutations"
-import { listMovieData } from "../../graphql/queries"
+// import { createMovieData, deleteMovieData } from "../../graphql/mutations"
+// import { listMovieData } from "../../graphql/queries"
 
 Amplify.configure(config)
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
-const MovieList = (props) => {
+const MovieList = () => {
 
-    const { movieList } = props
+    const [movieList, setMovieList] = React.useState([])
 
-    console.log(movieList)
+    //console.log(movieList)
 
-    const handleSaveMovie = async () => {
+/*     const handleSaveMovie = async () => {
       console.log(`Gonna save the movie ${movie.Title} now...`)
       const newMovieToSave = {
         title: movie.Title,
@@ -45,27 +48,40 @@ const MovieList = (props) => {
       } catch (err) {
         console.log("Save movie error", err)
       }
-    }
+    } */
 
     const handleDeleteMovie = async (movie) => {
-      console.log(movie)
         try {
-          const response = await API.graphql({
-            query: deleteMovieData,
-            variables: { input: { id: movie.id, _version: movie._version } },
-            authMode: 'API_KEY'
-          })
-          console.log(response)
+          const movieToDelete = await DataStore.query(MovieData, movie.id)
+          
+          console.log(movieToDelete)
+          await DataStore.delete(movieToDelete)
         } catch (err) {
           console.log("Save delete movie error: ", err)
         }
     }
 
+    const fetcher = async () => {
+      try {
+        let tempList = await DataStore.query(MovieData)
+        setMovieList(tempList)
+      } catch (err) {
+        console.log('Retrieve movie list error', err)
+      }
+      return movieList
+    }
+
+    const { data, error } = useSWR('/movies', fetcher, {refreshInterval: 500
+    })
+
+    if (error) return <div>Failed to load list of movies.</div>
+    if (!data) return <div>Loading...</div>
+
     return (
         <>
             <ResponsiveAppBar />
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                {movieList.map((movie) => (
+                {movieList && movieList.map((movie) => (
                     <Card key={movie.id} sx={{ maxWidth: 200, m: 1 }}>
                     <CardMedia component='img' image={movie.poster} title={movie.title} height='300' />
                     <CardContent >
@@ -94,7 +110,7 @@ const MovieList = (props) => {
 }
 
 // 1. Nextjs will execute this function first.  It is never visible to the client!
-export async function getStaticProps() {
+/* export async function getStaticProps() {
     let movieList = []
     try {
         const response = await API.graphql({
@@ -112,6 +128,6 @@ export async function getStaticProps() {
         },
         revalidate: 10
     }
-}
+} */
 
 export default MovieList
