@@ -178,6 +178,16 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "ratings": {
+                    "name": "ratings",
+                    "isArray": true,
+                    "type": {
+                        "nonModel": "Rating"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -206,6 +216,33 @@ export const schema = {
         }
     },
     "enums": {},
-    "nonModels": {},
-    "version": "fee7a2ba21ed22bf983b1ee95f13e702"
+    "nonModels": {
+        "Rating": {
+            "name": "Rating",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "source": {
+                    "name": "source",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "value": {
+                    "name": "value",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        }
+    },
+    "version": "7db40bc2178cada5194a25083e525526"
 };

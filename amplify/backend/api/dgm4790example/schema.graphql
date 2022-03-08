@@ -2,6 +2,12 @@ input AMPLIFY {
   globalAuthRule: AuthRule = {allow: public}
 }
 
+type Rating {
+  id: ID!
+  source: String
+  value: String
+}
+
 type MovieData @model {
   id: ID!
   title: String
@@ -28,4 +34,6 @@ type MovieData @model {
   production: String
   website: String
   response: String
+  ratings: [Rating]
 }
+ 

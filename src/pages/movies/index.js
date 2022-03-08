@@ -94,7 +94,12 @@ const MovieList = () => {
                             </Typography>
                             <Typography variant='subtitle2' color='textSecondary'>
                                 Director: {movie.director}
-                            </Typography>
+                                </Typography>
+                                {movie.ratings?.map((rating) => {
+                                    <Typography variant='caption'>
+                                        Rating Source: {rating.source} Rating Value: {rating.value}
+                                    </Typography>
+                                })}
                         </Box>
                     </CardContent>
                     <CardActions>

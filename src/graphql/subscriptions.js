@@ -1,51 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateRating = /* GraphQL */ `
-  subscription OnCreateRating {
-    onCreateRating {
-      source
-      value
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      movieDataRatingsId
-    }
-  }
-`;
-export const onUpdateRating = /* GraphQL */ `
-  subscription OnUpdateRating {
-    onUpdateRating {
-      source
-      value
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      movieDataRatingsId
-    }
-  }
-`;
-export const onDeleteRating = /* GraphQL */ `
-  subscription OnDeleteRating {
-    onDeleteRating {
-      source
-      value
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      movieDataRatingsId
-    }
-  }
-`;
 export const onCreateMovieData = /* GraphQL */ `
   subscription OnCreateMovieData {
     onCreateMovieData {
@@ -64,10 +19,6 @@ export const onCreateMovieData = /* GraphQL */ `
       country
       awards
       poster
-      ratings {
-        nextToken
-        startedAt
-      }
       metascore
       imdbRating
       imdbVotes
@@ -78,6 +29,11 @@ export const onCreateMovieData = /* GraphQL */ `
       production
       website
       response
+      ratings {
+        id
+        source
+        value
+      }
       createdAt
       updatedAt
       _version
@@ -104,10 +60,6 @@ export const onUpdateMovieData = /* GraphQL */ `
       country
       awards
       poster
-      ratings {
-        nextToken
-        startedAt
-      }
       metascore
       imdbRating
       imdbVotes
@@ -118,6 +70,11 @@ export const onUpdateMovieData = /* GraphQL */ `
       production
       website
       response
+      ratings {
+        id
+        source
+        value
+      }
       createdAt
       updatedAt
       _version
@@ -144,10 +101,6 @@ export const onDeleteMovieData = /* GraphQL */ `
       country
       awards
       poster
-      ratings {
-        nextToken
-        startedAt
-      }
       metascore
       imdbRating
       imdbVotes
@@ -158,6 +111,11 @@ export const onDeleteMovieData = /* GraphQL */ `
       production
       website
       response
+      ratings {
+        id
+        source
+        value
+      }
       createdAt
       updatedAt
       _version

@@ -2,7 +2,12 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-
+export declare class Rating {
+  readonly id: string;
+  readonly source?: string;
+  readonly value?: string;
+  constructor(init: ModelInit<Rating>);
+}
 
 type MovieDataMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
@@ -34,6 +39,7 @@ export declare class MovieData {
   readonly production?: string;
   readonly website?: string;
   readonly response?: string;
+  readonly ratings?: (Rating | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<MovieData, MovieDataMetaData>);

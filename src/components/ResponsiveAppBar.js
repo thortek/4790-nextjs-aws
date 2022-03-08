@@ -56,6 +56,9 @@ const ResponsiveAppBar = () => {
 
   const handleSaveMovie = async () => {
     try {
+      const ratingsArray = fetchedMovie.Ratings.map(rating => {
+        return { value: rating.Value, source: rating.Source }
+      })
       await DataStore.save(
         new MovieData(
           {
@@ -73,6 +76,7 @@ const ResponsiveAppBar = () => {
             dvd: fetchedMovie.DVD,
             boxOffice: fetchedMovie.BoxOffice,
             rated: fetchedMovie.Rated,
+            ratings: ratingsArray,
           }
         )
       )

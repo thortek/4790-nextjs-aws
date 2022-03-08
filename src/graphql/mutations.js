@@ -1,60 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createRating = /* GraphQL */ `
-  mutation CreateRating(
-    $input: CreateRatingInput!
-    $condition: ModelRatingConditionInput
-  ) {
-    createRating(input: $input, condition: $condition) {
-      source
-      value
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      movieDataRatingsId
-    }
-  }
-`;
-export const updateRating = /* GraphQL */ `
-  mutation UpdateRating(
-    $input: UpdateRatingInput!
-    $condition: ModelRatingConditionInput
-  ) {
-    updateRating(input: $input, condition: $condition) {
-      source
-      value
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      movieDataRatingsId
-    }
-  }
-`;
-export const deleteRating = /* GraphQL */ `
-  mutation DeleteRating(
-    $input: DeleteRatingInput!
-    $condition: ModelRatingConditionInput
-  ) {
-    deleteRating(input: $input, condition: $condition) {
-      source
-      value
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      movieDataRatingsId
-    }
-  }
-`;
 export const createMovieData = /* GraphQL */ `
   mutation CreateMovieData(
     $input: CreateMovieDataInput!
@@ -76,10 +22,6 @@ export const createMovieData = /* GraphQL */ `
       country
       awards
       poster
-      ratings {
-        nextToken
-        startedAt
-      }
       metascore
       imdbRating
       imdbVotes
@@ -90,6 +32,11 @@ export const createMovieData = /* GraphQL */ `
       production
       website
       response
+      ratings {
+        id
+        source
+        value
+      }
       createdAt
       updatedAt
       _version
@@ -119,10 +66,6 @@ export const updateMovieData = /* GraphQL */ `
       country
       awards
       poster
-      ratings {
-        nextToken
-        startedAt
-      }
       metascore
       imdbRating
       imdbVotes
@@ -133,6 +76,11 @@ export const updateMovieData = /* GraphQL */ `
       production
       website
       response
+      ratings {
+        id
+        source
+        value
+      }
       createdAt
       updatedAt
       _version
@@ -162,10 +110,6 @@ export const deleteMovieData = /* GraphQL */ `
       country
       awards
       poster
-      ratings {
-        nextToken
-        startedAt
-      }
       metascore
       imdbRating
       imdbVotes
@@ -176,6 +120,11 @@ export const deleteMovieData = /* GraphQL */ `
       production
       website
       response
+      ratings {
+        id
+        source
+        value
+      }
       createdAt
       updatedAt
       _version
