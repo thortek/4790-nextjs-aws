@@ -3,7 +3,6 @@ input AMPLIFY {
 }
 
 type Rating {
-  id: ID!
   source: String
   value: String
 }

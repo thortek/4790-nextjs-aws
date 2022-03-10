@@ -30,7 +30,6 @@ export const getMovieData = /* GraphQL */ `
       website
       response
       ratings {
-        id
         source
         value
       }

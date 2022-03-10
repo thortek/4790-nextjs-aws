@@ -220,13 +220,6 @@ export const schema = {
         "Rating": {
             "name": "Rating",
             "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "source": {
                     "name": "source",
                     "isArray": false,
@@ -244,5 +237,5 @@ export const schema = {
             }
         }
     },
-    "version": "7db40bc2178cada5194a25083e525526"
+    "version": "b9e8f6b0287b1a0c8c4c18b62c7a20b6"
 };

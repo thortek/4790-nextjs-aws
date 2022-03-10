@@ -3,7 +3,6 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 export declare class Rating {
-  readonly id: string;
   readonly source?: string;
   readonly value?: string;
   constructor(init: ModelInit<Rating>);

@@ -33,7 +33,6 @@ export const createMovieData = /* GraphQL */ `
       website
       response
       ratings {
-        id
         source
         value
       }
@@ -77,7 +76,6 @@ export const updateMovieData = /* GraphQL */ `
       website
       response
       ratings {
-        id
         source
         value
       }
@@ -121,7 +119,6 @@ export const deleteMovieData = /* GraphQL */ `
       website
       response
       ratings {
-        id
         source
         value
       }

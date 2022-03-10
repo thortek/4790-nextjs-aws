@@ -97,7 +97,7 @@ const MovieList = () => {
                                 </Typography>
                                 {movie.ratings?.map((rating) => {
                                     <Typography variant='caption'>
-                                        Rating Source: {rating.source} Rating Value: {rating.value}
+                                        Rating Source: {rating?.source} Rating Value: {rating?.value}
                                     </Typography>
                                 })}
                         </Box>
