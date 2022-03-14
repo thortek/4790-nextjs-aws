@@ -1,6 +1,6 @@
 export async function getMovieByTitle(title) {
   const response = await fetch(
-    `http://www.omdbapi.com/?apikey=e38dd421&t=${title}&plot=full`,
+    `http://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_APIKEY}&t=${title}&plot=full`,
   )
   return await response.json()
 }
