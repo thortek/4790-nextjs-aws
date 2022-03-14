@@ -53,8 +53,6 @@ const MovieList = () => {
     const handleDeleteMovie = async (movie) => {
         try {
           const movieToDelete = await DataStore.query(MovieData, movie.id)
-          
-          console.log(movieToDelete)
           await DataStore.delete(movieToDelete)
         } catch (err) {
           console.log("Save delete movie error: ", err)
