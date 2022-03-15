@@ -1,4 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { Amplify } from "aws-amplify"
+import config from '../../aws-exports'
+
+Amplify.configure(config)
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
