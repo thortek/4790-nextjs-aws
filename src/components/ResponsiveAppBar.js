@@ -45,9 +45,17 @@ const ResponsiveAppBar = () => {
   }
 
   const handleSearch = async () => {
-    const omdbMovie = await getMovieByTitle(searchTerms)
-    setFetchedMovie(omdbMovie)
-    console.log(omdbMovie)
+
+    const omdbMovie = await fetch('/api', {
+      method: 'POST',
+      body: JSON.stringify({ title: searchTerms }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    setFetchedMovie(await omdbMovie.json())
+    // console.log(await omdbMovie.json())
     setDialog({
       isOpen: true,
       movie: fetchedMovie,
@@ -100,8 +108,8 @@ const ResponsiveAppBar = () => {
     <>
     <AppBar position='static'>
       <Container maxWidth='xl'>
-        <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between'}}>
+          <Box >
             <Tooltip title='Show Movies'>
               <Button sx={{ my: 2, color: 'white', display: 'block' }}>
                 <Link href="/movies">Movies</Link>
@@ -109,7 +117,7 @@ const ResponsiveAppBar = () => {
             </Tooltip>
           </Box>
 
-          <Box>
+          <Box >
             <IconButton onClick={handleSearch}>
               <SearchIcon />
             </IconButton>
@@ -119,11 +127,11 @@ const ResponsiveAppBar = () => {
             variant="outlined"
               onChange={handleChange}
               value={searchTerms}
-            sx={{ backgroundColor: 'white', flexGrow: 2, mr: 20}}
+            sx={{ backgroundColor: 'white', mr: 10, width: '50ch'}}
             />
           </Box>
           
-          <Box sx={{ flexGrow: 0 }}>
+          <Box >
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
@@ -133,7 +141,7 @@ const ResponsiveAppBar = () => {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: '50px' }}
               id='menu-appbar'
               anchorEl={anchorElUser}
               anchorOrigin={{

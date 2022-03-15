@@ -78,10 +78,10 @@ const MovieList = () => {
     return (
         <>
             <ResponsiveAppBar />
-            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {movieList && movieList.map((movie) => (
-                    <Card key={movie.id} sx={{ maxWidth: 200, m: 1 }}>
-                    <CardMedia component='img' image={movie.poster} title={movie.title} height='300' />
+                    <Card key={movie.id} sx={{ minWidth: 200, m: 1 }}>
+                    <CardMedia component='img' image={movie.poster} title={movie.title}  />
                     <CardContent >
                         <Box>
                             <Typography variant='subtitle1' color='textSecondary'>
