@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { DataStore } from 'aws-amplify'
-import config from '../aws-exports'
 import Link from 'next/link'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -15,12 +14,9 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search'
-import { getMovieByTitle } from "../utils/api-util"
-import { createMovieData } from '../graphql/mutations'
 import MovieFoundDialog from './MovieFoundDialog'
 import { MovieData } from '../models'
 
-// Amplify.configure(config)
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
@@ -55,7 +51,7 @@ const ResponsiveAppBar = () => {
     })
 
     setFetchedMovie(await omdbMovie.json())
-    // console.log(await omdbMovie.json())
+    
     setDialog({
       isOpen: true,
       movie: fetchedMovie,

@@ -1,9 +1,9 @@
-export async function getMovieByTitle(title) {
+/* export async function getMovieByTitle(title) {
   const response = await fetch(
     `http://www.omdbapi.com/?apikey=${process.env.OMDBAPI_KEY}&t=${title}&plot=full`,
   )
   return await response.json()
-}
+} */
 
 const output = {
   Title: 'Thor',
