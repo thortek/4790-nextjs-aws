@@ -42,7 +42,7 @@ const ResponsiveAppBar = () => {
 
   const handleSearch = async () => {
 
-    const omdbMovie = await fetch('/api', {
+    const omdbMovie = await fetch('/api/movie', {
       method: 'POST',
       body: JSON.stringify({ title: searchTerms }),
       headers: {
