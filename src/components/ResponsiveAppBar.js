@@ -44,6 +44,12 @@ const ResponsiveAppBar = () => {
     setSearchTerms(event.target.value)
   }
 
+  const handleKeyUp = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  }
+
   const handleSearch = async () => {
     if (!searchTerms) return
     const omdbMovie = await fetch('/api/movie', {
@@ -125,6 +131,7 @@ const ResponsiveAppBar = () => {
               label="Search"
               variant="filled"
               onChange={handleChange}
+              onKeyUp={handleKeyUp}
               value={searchTerms}
               sx={{
                 backgroundColor: 'white', mr: 1, width: '50ch', [theme.breakpoints.down('sm')]: {
