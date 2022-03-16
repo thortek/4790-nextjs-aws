@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Head from 'next/head'
 import { Amplify, DataStore } from "aws-amplify"
 import useSWR from "swr"
 import { MovieData } from '../../models'
@@ -41,7 +42,11 @@ const MovieList = () => {
     if (!data) return <div>Loading...</div>
 
     return (
-        <>
+      <>
+        <Head>
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+          <title>Movie List</title>
+        </Head>
             <ResponsiveAppBar />
             <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {movieList && movieList.map((movie) => (

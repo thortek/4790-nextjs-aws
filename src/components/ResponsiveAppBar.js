@@ -7,7 +7,6 @@ import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
-import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
@@ -16,9 +15,14 @@ import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search'
 import MovieFoundDialog from './MovieFoundDialog'
 import { MovieData } from '../models'
+import { createTheme } from '@mui/material/styles'
 
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+
+const theme = createTheme({
+
+})
 
 const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null)
@@ -40,8 +44,14 @@ const ResponsiveAppBar = () => {
     setSearchTerms(event.target.value)
   }
 
-  const handleSearch = async () => {
+  const handleKeyUp = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  }
 
+  const handleSearch = async () => {
+    if (!searchTerms) return
     const omdbMovie = await fetch('/api/movie', {
       method: 'POST',
       body: JSON.stringify({ title: searchTerms }),
@@ -51,7 +61,7 @@ const ResponsiveAppBar = () => {
     })
 
     setFetchedMovie(await omdbMovie.json())
-    
+
     setDialog({
       isOpen: true,
       movie: fetchedMovie,
@@ -102,12 +112,11 @@ const ResponsiveAppBar = () => {
 
   return (
     <>
-    <AppBar position='static'>
-      <Container maxWidth='xl'>
-        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between'}}>
+      <AppBar position='static'>
+        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box >
             <Tooltip title='Show Movies'>
-              <Button sx={{ my: 2, color: 'white', display: 'block' }}>
+              <Button variant="contained" color="primary" sx={{ my: 2, display: 'block' }}>
                 <Link href="/movies">Movies</Link>
               </Button>
             </Tooltip>
@@ -117,16 +126,21 @@ const ResponsiveAppBar = () => {
             <IconButton onClick={handleSearch}>
               <SearchIcon />
             </IconButton>
-          <TextField
-            size="small"
-            label="Search"
-            variant="outlined"
+            <TextField
+              size="small"
+              label="Search"
+              variant="filled"
               onChange={handleChange}
+              onKeyUp={handleKeyUp}
               value={searchTerms}
-            sx={{ backgroundColor: 'white', mr: 10, width: '50ch'}}
+              sx={{
+                backgroundColor: 'white', mr: 1, width: '50ch', [theme.breakpoints.down('sm')]: {
+                  width: '20ch',
+                },
+              }}
             />
           </Box>
-          
+
           <Box >
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -160,9 +174,8 @@ const ResponsiveAppBar = () => {
             </Menu>
           </Box>
         </Toolbar>
-      </Container>
-    </AppBar>
-    <MovieFoundDialog open={dialog.isOpen} movie={fetchedMovie} onClose={handleCloseDialog} onSaveMovie={handleSaveMovie}/>
+      </AppBar>
+      <MovieFoundDialog open={dialog.isOpen} movie={fetchedMovie} onClose={handleCloseDialog} onSaveMovie={handleSaveMovie} />
     </>
   )
 }
