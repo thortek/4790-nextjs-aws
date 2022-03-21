@@ -50,9 +50,11 @@ const MovieList = () => {
             <ResponsiveAppBar />
             <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {movieList && movieList.map((movie) => (
-                    <Card key={movie.id} sx={{ minWidth: 200, m: 1 }}>
-                    <CardMedia component='img' image={movie.poster} title={movie.title}  />
-                    <CardContent >
+                  <Card key={movie.id} sx={{ maxWidth: 300, m: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+                  
+                    <CardMedia component='img' image={movie.poster} title={movie.title} />
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <CardContent>
                         <Box>
                             <Typography variant='subtitle1' color='textSecondary'>
                                 Year: {movie.year}
@@ -75,6 +77,7 @@ const MovieList = () => {
                             <DeleteIcon/>
                         </IconButton>
                     </CardActions>
+                    </Box>
                 </Card>
             ))}
             </Box>
