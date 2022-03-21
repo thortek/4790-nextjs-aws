@@ -10,6 +10,11 @@
       "StackName": "amplify-dgm4790example-staging-215501",
       "StackId": "arn:aws:cloudformation:us-west-2:582831699030:stack/amplify-dgm4790example-staging-215501/9cb66fb0-7ef2-11ec-a5fa-0a90a5a5088f",
       "AmplifyAppId": "d3m6234ucnqovm"
+    },
+    "categories": {
+      "auth": {
+        "dgm4790examplec73e0e5c": {}
+      }
     }
   }
 }
