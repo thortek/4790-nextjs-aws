@@ -24,7 +24,7 @@ const theme = createTheme({
 
 })
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = ({user, signOut}) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null)
   const [fetchedMovie, setFetchedMovie] = React.useState({})
   const [searchTerms, setSearchTerms] = React.useState("")
@@ -166,11 +166,14 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+            <MenuItem>Profile</MenuItem>
+            <MenuItem>Account</MenuItem>
+            <MenuItem onClick={signOut}>Logout</MenuItem>
+{/*               {settings.map((setting) => (
                 <MenuItem key={setting}>
                   <Typography textAlign='center'>{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
             </Menu>
           </Box>
         </Toolbar>

@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto&family=Source+Sans+Pro:wght@300&display=swap');
 
+:root {
+  --amplify-components-authenticator-max-width: auto;
+  --amplify-components-authenticator-modal-background-color: bisque;
+  --amplify-components-tabs-item-color: blue;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -13,5 +19,9 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.amplify-authenticator {
+  max-width: 100%;
 }
 

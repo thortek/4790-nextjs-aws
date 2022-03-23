@@ -4,7 +4,6 @@ import { Amplify, DataStore } from "aws-amplify"
 import useSWR from "swr"
 import { MovieData } from '../../models'
 import config from "../../aws-exports"
-import ResponsiveAppBar from "../../components/ResponsiveAppBar"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -12,7 +11,6 @@ Amplify.configure(config)
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
 const MovieList = () => {
-
     const [movieList, setMovieList] = React.useState([])
 
 
@@ -47,7 +45,6 @@ const MovieList = () => {
           <meta name="viewport" content="initial-scale=1, width=device-width" />
           <title>Movie List</title>
         </Head>
-            <ResponsiveAppBar />
             <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {movieList && movieList.map((movie) => (
                   <Card key={movie.id} sx={{ maxWidth: 300, m: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
