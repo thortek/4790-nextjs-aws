@@ -14,12 +14,10 @@ const formFields = {
     },
     name: {
       placeholder: 'First Name',
-      isRequired: true,
       order: 2
     },
     family_name: {
       placeholder: 'Last Name',
-      required: true,
       order: 3
     },
     password: {

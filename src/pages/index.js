@@ -1,6 +1,9 @@
 import Head from 'next/head'
+import { useAuthenticator } from '@aws-amplify/ui-react'
 
 export default function Home() {
+  const { user } = useAuthenticator((context) => [context.user]);
+
   return (
     <div>
       <Head>
@@ -8,7 +11,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>Welcome to my Next.js App!</h1>
+        <h1>Welcome to my Next.js App {user.attributes.name}!</h1>
       </main>
     </div>
   )
