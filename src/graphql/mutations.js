@@ -41,6 +41,7 @@ export const createMovieData = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -84,6 +85,7 @@ export const updateMovieData = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -127,6 +129,7 @@ export const deleteMovieData = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;

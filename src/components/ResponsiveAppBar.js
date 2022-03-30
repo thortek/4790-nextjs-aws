@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { DataStore } from 'aws-amplify'
+import { Amplify, DataStore } from 'aws-amplify'
 import Link from 'next/link'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -16,7 +16,6 @@ import SearchIcon from '@mui/icons-material/Search'
 import MovieFoundDialog from './MovieFoundDialog'
 import { MovieData } from '../models'
 import { createTheme } from '@mui/material/styles'
-
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
@@ -38,6 +37,11 @@ const ResponsiveAppBar = ({user, signOut}) => {
   }
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
+  }
+
+  const handleSignOut = () => {
+    DataStore.clear()
+    signOut()
   }
 
   const handleChange = (event) => {
@@ -168,7 +172,7 @@ const ResponsiveAppBar = ({user, signOut}) => {
             >
             <MenuItem>Profile</MenuItem>
             <MenuItem>Account</MenuItem>
-            <MenuItem onClick={signOut}>Logout</MenuItem>
+            <MenuItem onClick={handleSignOut}>Logout</MenuItem>
 {/*               {settings.map((setting) => (
                 <MenuItem key={setting}>
                   <Typography textAlign='center'>{setting}</Typography>

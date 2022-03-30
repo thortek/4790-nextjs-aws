@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateMovieData = /* GraphQL */ `
-  subscription OnCreateMovieData {
-    onCreateMovieData {
+  subscription OnCreateMovieData($owner: String) {
+    onCreateMovieData(owner: $owner) {
       id
       title
       year
@@ -38,12 +38,13 @@ export const onCreateMovieData = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
 export const onUpdateMovieData = /* GraphQL */ `
-  subscription OnUpdateMovieData {
-    onUpdateMovieData {
+  subscription OnUpdateMovieData($owner: String) {
+    onUpdateMovieData(owner: $owner) {
       id
       title
       year
@@ -78,12 +79,13 @@ export const onUpdateMovieData = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
 export const onDeleteMovieData = /* GraphQL */ `
-  subscription OnDeleteMovieData {
-    onDeleteMovieData {
+  subscription OnDeleteMovieData($owner: String) {
+    onDeleteMovieData(owner: $owner) {
       id
       title
       year
@@ -118,6 +120,7 @@ export const onDeleteMovieData = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
