@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Head from 'next/head'
-import { Amplify, DataStore } from "aws-amplify"
+import { Amplify, DataStore, AuthModeStrategyType } from "aws-amplify"
 import useSWR from "swr"
 import { MovieData } from '../../models'
 import config from "../../aws-exports"
@@ -8,7 +8,13 @@ import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton 
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 
-Amplify.configure(config)
+// Amplify.configure(config)
+Amplify.configure({
+  ...config,
+  DataStore: {
+    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH
+  }
+})
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
 const MovieList = () => {
