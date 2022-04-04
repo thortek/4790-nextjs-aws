@@ -1,18 +1,25 @@
 import * as React from 'react'
 import Head from 'next/head'
-import { Amplify, DataStore } from "aws-amplify"
+import { Amplify, DataStore, AuthModeStrategyType } from "aws-amplify"
 import useSWR from "swr"
 import { MovieData } from '../../models'
 import config from "../../aws-exports"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
+import { useAuthenticator } from '@aws-amplify/ui-react'
 
-Amplify.configure(config)
+Amplify.configure({
+  ...config,
+  DataStore: {
+    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH
+  }
+})
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
 const MovieList = () => {
   const [movieList, setMovieList] = React.useState([])
+  const { user } = useAuthenticator((context) => [context.user])
 
   const handleEditMovie = async (movie) => {
     /* Models in DataStore are immutable. To update a record you must use the copyOf function
@@ -79,12 +86,12 @@ const MovieList = () => {
                 </Box>
               </CardContent>
               <CardActions>
-                <IconButton aria-label="delete" onClick={() => handleDeleteMovie(movie)}>
+                {user.username === movie.owner && (<IconButton aria-label="delete" onClick={() => handleDeleteMovie(movie)}>
                   <DeleteIcon />
-                </IconButton>
-                <IconButton aria-label="edit" onClick={() => handleEditMovie(movie)}>
+                </IconButton>)}
+                {/*                 <IconButton aria-label="edit" onClick={() => handleEditMovie(movie)}>
                   <EditIcon />
-                </IconButton>
+                </IconButton> */}
               </CardActions>
             </Box>
           </Card>
