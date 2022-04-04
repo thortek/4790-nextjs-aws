@@ -4,9 +4,11 @@ import { Amplify, DataStore, AuthModeStrategyType } from "aws-amplify"
 import useSWR from "swr"
 import { MovieData } from '../../models'
 import config from "../../aws-exports"
-import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
+import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton, Snackbar } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
+import { useAuthenticator } from '@aws-amplify/ui-react'
+
 
 // Amplify.configure(config)
 Amplify.configure({
@@ -19,6 +21,9 @@ Amplify.configure({
 // 2. Nextjs will execute this component function AFTER getStaticProps
 const MovieList = () => {
   const [movieList, setMovieList] = React.useState([])
+  const [open, setOpen] = React.useState(false)
+  const [snackbarMessage, setSnackbarMessage] = React.useState("")
+  const { user, signOut } = useAuthenticator((context) => [context.user])
 
   const handleEditMovie = async (movie) => {
     /* Models in DataStore are immutable. To update a record you must use the copyOf function
@@ -28,10 +33,25 @@ const MovieList = () => {
       console.log("Here is where we would edit movie data.")
     }))
   }
+
+  const handleToast = (message) => {
+    setSnackbarMessage(message)
+    setOpen(true)
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+
   const handleDeleteMovie = async (movie) => {
     try {
       const movieToDelete = await DataStore.query(MovieData, movie.id)
       await DataStore.delete(movieToDelete)
+      handleToast(`The movie "${movie.title}" was deleted.`)
     } catch (err) {
       console.log("Save delete movie error: ", err)
     }
@@ -85,17 +105,23 @@ const MovieList = () => {
                 </Box>
               </CardContent>
               <CardActions>
-                <IconButton aria-label="delete" onClick={() => handleDeleteMovie(movie)}>
+                {user.username === movie.owner && (<IconButton aria-label="delete" onClick={() => handleDeleteMovie(movie)}>
                   <DeleteIcon />
-                </IconButton>
-                <IconButton aria-label="edit" onClick={() => handleEditMovie(movie)}>
+                </IconButton>)}
+{/*                 <IconButton aria-label="edit" onClick={() => handleEditMovie(movie)}>
                   <EditIcon />
-                </IconButton>
+                </IconButton> */}
               </CardActions>
             </Box>
           </Card>
         ))}
       </Box>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={snackbarMessage}
+      />
     </>
   )
 }
