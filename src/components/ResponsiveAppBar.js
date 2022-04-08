@@ -12,6 +12,7 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
+import Snackbar from '@mui/material/Snackbar'
 import SearchIcon from '@mui/icons-material/Search'
 import MovieFoundDialog from './MovieFoundDialog'
 import { MovieData } from '../models'
@@ -31,6 +32,9 @@ const ResponsiveAppBar = ({user, signOut}) => {
     isOpen: false,
     movie: undefined,
   })
+  const [open, setOpen] = React.useState(false)
+  const [snackBarMessage, setSnackBarMessage] = React.useState('')
+  const [snackBarSeverity, setSnackBarSeverity] = React.useState('')
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)
@@ -72,11 +76,25 @@ const ResponsiveAppBar = ({user, signOut}) => {
     })
   }
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setOpen(false)
+  }
+
+  const handleToast = (message, severity) => {
+    setSnackBarMessage(message)
+    setSnackBarSeverity(severity)
+    setOpen(true)
+  }
+
   const handleSaveMovie = async () => {
     try {
       const ratingsArray = fetchedMovie.Ratings.map(rating => {
         return { value: rating.Value, source: rating.Source }
       })
+      handleToast(`The movie "${fetchedMovie.Title}" was saved.`, 'success')
       await DataStore.save(
         new MovieData(
           {
@@ -101,6 +119,7 @@ const ResponsiveAppBar = ({user, signOut}) => {
       console.log('Movie was saved!')
     } catch (err) {
       console.log("Save movie error ", err)
+      handleToast(`Error: The movie "${fetchedMovie.Title}" was not saved.`, 'error')
     } finally {
       setDialog({
         isOpen: false
@@ -183,6 +202,7 @@ const ResponsiveAppBar = ({user, signOut}) => {
         </Toolbar>
       </AppBar>
       <MovieFoundDialog open={dialog.isOpen} movie={fetchedMovie} onClose={handleCloseDialog} onSaveMovie={handleSaveMovie} />
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} message={snackBarMessage} severity={snackBarSeverity}/>
     </>
   )
 }

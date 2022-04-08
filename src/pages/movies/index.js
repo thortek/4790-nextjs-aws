@@ -4,7 +4,7 @@ import { Amplify, DataStore, AuthModeStrategyType } from "aws-amplify"
 import useSWR from "swr"
 import { MovieData } from '../../models'
 import config from "../../aws-exports"
-import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
+import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton, Snackbar } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { useAuthenticator } from '@aws-amplify/ui-react'
@@ -20,6 +20,10 @@ Amplify.configure({
 const MovieList = () => {
   const [movieList, setMovieList] = React.useState([])
   const { user } = useAuthenticator((context) => [context.user])
+  const [open, setOpen] = React.useState(false)
+  const [snackBarMessage, setSnackBarMessage] = React.useState('')
+  const [snackBarSeverity, setSnackBarSeverity] = React.useState('')
+
 
   const handleEditMovie = async (movie) => {
     /* Models in DataStore are immutable. To update a record you must use the copyOf function
@@ -29,12 +33,28 @@ const MovieList = () => {
       console.log("Here is where we would edit movie data.")
     }))
   }
+
+  const handleToast = (message, severity) => {
+    setSnackBarMessage(message)
+    setSnackBarSeverity(severity)
+    setOpen(true)
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setOpen(false)
+  }
+
   const handleDeleteMovie = async (movie) => {
     try {
+      handleToast(`The movie "${movie.title}" was deleted.`, 'success')
       const movieToDelete = await DataStore.query(MovieData, movie.id)
       await DataStore.delete(movieToDelete)
     } catch (err) {
       console.log("Save delete movie error: ", err)
+      handleToast(`Error: Could not delete movie`, 'error')
     }
   }
 
@@ -97,6 +117,7 @@ const MovieList = () => {
           </Card>
         ))}
       </Box>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} message={snackBarMessage} severity={snackBarSeverity}/>
     </>
   )
 }
