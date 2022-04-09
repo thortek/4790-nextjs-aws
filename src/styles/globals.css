@@ -2,8 +2,6 @@
 
 :root {
   --amplify-components-authenticator-max-width: auto;
-  --amplify-components-authenticator-modal-background-color: bisque;
-  --amplify-components-tabs-item-color: blue;
 }
 
 * {
