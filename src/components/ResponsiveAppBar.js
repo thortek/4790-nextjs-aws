@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Amplify, DataStore } from 'aws-amplify'
+import { DataStore } from 'aws-amplify'
+import config from '../aws-exports'
 import Link from 'next/link'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
