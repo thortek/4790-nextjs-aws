@@ -3,7 +3,7 @@ type Rating {
   value: String
 }
 
-type MovieData @model @auth(rules: [{allow: owner}, {allow: private, operations: [read]}]) {
+type MovieData @model @auth(rules: [{allow: owner}, {allow: public, operations: [read]}, {allow: private, operations: [read]}]) {
   id: ID!
   title: String
   year: String

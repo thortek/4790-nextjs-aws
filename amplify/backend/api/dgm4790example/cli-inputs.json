@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "dgm4790example",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/Users/thor_anderson/UVUSpring2022/DGM4790/4790-nextjs-aws/amplify/backend/api/dgm4790example/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-9e7975cf-b725-4cb3-94b3-2dbdbba78bd5/amplify/backend/api/dgm4790example/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",
@@ -21,15 +21,7 @@
     "conflictResolution": {
       "defaultResolutionStrategy": {
         "type": "AUTOMERGE"
-      },
-      "perModelResolutionStrategy": [
-        {
-          "resolutionStrategy": {
-            "type": "AUTOMERGE"
-          },
-          "entityName": "MovieData"
-        }
-      ]
+      }
     }
   }
 }
