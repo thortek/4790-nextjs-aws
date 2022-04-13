@@ -2,7 +2,7 @@
   "providers": [
     "awscloudformation"
   ],
-  "projectName": "dgm4790example",
+  "projectName": "DGM4790Example",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {

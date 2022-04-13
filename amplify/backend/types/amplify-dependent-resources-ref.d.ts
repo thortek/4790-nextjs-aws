@@ -1,13 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
-    "api": {
-        "dgm4790example": {
-            "GraphQLAPIKeyOutput": "string",
-            "GraphQLAPIIdOutput": "string",
-            "GraphQLAPIEndpointOutput": "string"
-        }
-    },
     "auth": {
-        "dgm4790examplec73e0e5c": {
+        "dgm4790examplecf6936ea": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -15,6 +8,12 @@ export type AmplifyDependentResourcesAttributes = {
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
             "AppClientID": "string"
+        }
+    },
+    "api": {
+        "dgm4790example": {
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
         }
     }
 }

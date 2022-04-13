@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { DataStore } from 'aws-amplify'
-import config from '../aws-exports'
+import { DataStore } from 'aws-amplify';
+import { MovieData } from '../models';
 import Link from 'next/link'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -16,7 +16,6 @@ import TextField from '@mui/material/TextField'
 import Snackbar from '@mui/material/Snackbar'
 import SearchIcon from '@mui/icons-material/Search'
 import MovieFoundDialog from './MovieFoundDialog'
-import { MovieData } from '../models'
 import { createTheme } from '@mui/material/styles'
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
@@ -128,10 +127,11 @@ const ResponsiveAppBar = ({user, signOut}) => {
     }
   }
 
-  const handleCloseDialog = () => {
+  const handleCloseDialog = async () => {
     setDialog({
       isOpen: false
     })
+    await DataStore.start()
   }
 
   return (

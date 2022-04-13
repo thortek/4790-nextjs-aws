@@ -1,13 +1,13 @@
 import * as React from 'react'
 import Head from 'next/head'
-import { Amplify, DataStore, AuthModeStrategyType } from "aws-amplify"
+import {DataStore } from 'aws-amplify';
+import config from '../../aws-exports'
+import { MovieData } from '../../models';
 import useSWR from "swr"
-import { MovieData } from '../../models'
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton, Snackbar } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { useAuthenticator } from '@aws-amplify/ui-react'
-
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
 const MovieList = () => {
@@ -56,13 +56,13 @@ const MovieList = () => {
       let tempList = await DataStore.query(MovieData)
       setMovieList(tempList)
     } catch (err) {
-      console.log('Retrieve movie list error', err)
+      console.log('There are no movies to retrieve')
     }
     return movieList
   }
 
   const { data, error } = useSWR('/movies', fetcher, {
-    refreshInterval: 500
+    refreshInterval: 1000
   })
 
   if (error) return <div>Failed to load list of movies.</div>

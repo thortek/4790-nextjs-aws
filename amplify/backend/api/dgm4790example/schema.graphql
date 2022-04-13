@@ -1,9 +1,4 @@
-type Rating {
-  source: String
-  value: String
-}
-
-type MovieData @model @auth(rules: [{allow: owner}, {allow: public, operations: [read]}, {allow: private, operations: [read]}]) {
+type MovieData @model @auth(rules: [{allow: owner}, {allow: private, operations: [read]}]) {
   id: ID!
   title: String
   year: String
@@ -30,5 +25,10 @@ type MovieData @model @auth(rules: [{allow: owner}, {allow: public, operations: 
   website: String
   response: String
   ratings: [Rating]
+}
+
+type Rating {
+  source: String
+  value: String
 }
  
