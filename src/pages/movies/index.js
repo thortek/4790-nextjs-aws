@@ -1,12 +1,10 @@
 import * as React from 'react'
 import Head from 'next/head'
 import {DataStore } from 'aws-amplify';
-import config from '../../aws-exports'
 import { MovieData } from '../../models';
 import useSWR from "swr"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton, Snackbar } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
 import { useAuthenticator } from '@aws-amplify/ui-react'
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
@@ -102,9 +100,6 @@ const MovieList = () => {
                 {user.username === movie.owner && (<IconButton aria-label="delete" onClick={() => handleDeleteMovie(movie)}>
                   <DeleteIcon />
                 </IconButton>)}
-                {/*                 <IconButton aria-label="edit" onClick={() => handleEditMovie(movie)}>
-                  <EditIcon />
-                </IconButton> */}
               </CardActions>
             </Box>
           </Card>
