@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "dgm4790example",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-6987feba-1095-4c1f-81a8-391293b051c0/amplify/backend/api/dgm4790example/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-c621dd16-632d-4062-8de8-9b6868feb1be/amplify/backend/api/dgm4790example/schema.graphql",
     "defaultAuthType": {
       "mode": "AMAZON_COGNITO_USER_POOLS",
       "cognitoUserPoolId": "authdgm4790examplecf6936ea"
@@ -16,6 +16,11 @@
     "additionalAuthTypes": [
       {
         "mode": "AWS_IAM"
+      },
+      {
+        "mode": "API_KEY",
+        "keyDescription": "api key description",
+        "expirationTime": 30
       }
     ]
   }

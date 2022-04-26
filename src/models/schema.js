@@ -233,6 +233,12 @@ export const schema = {
                                 "operations": [
                                     "read"
                                 ]
+                            },
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
                             }
                         ]
                     }
