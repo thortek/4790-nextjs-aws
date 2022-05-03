@@ -9,12 +9,13 @@ import React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Button, Flex, Image, Rating, Text } from "@aws-amplify/ui-react";
 export default function CardC(props) {
-  const { overrides, ...rest } = props;
+  const { movieData, overrides, ...rest } = props;
   return (
     <Flex
       gap="0"
       direction="column"
       width="320px"
+      height="600px"
       justifyContent="center"
       position="relative"
       padding="0px 0px 0px 0px"
@@ -24,11 +25,13 @@ export default function CardC(props) {
     >
       <Image
         height="408px"
-        shrink="0"
+        grow="1"
+        basis="408px"
         alignSelf="stretch"
         objectFit="cover"
         position="relative"
         padding="0px 0px 0px 0px"
+        src={movieData?.poster}
         {...getOverrideProps(overrides, "image")}
       ></Image>
       <Flex
@@ -67,7 +70,7 @@ export default function CardC(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="Classic Long Sleeve T-Shirt"
+            children={movieData?.title}
             {...getOverrideProps(overrides, "Classic Long Sleeve T-Shirt")}
           ></Text>
           <Text
@@ -87,7 +90,7 @@ export default function CardC(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="Information about this product"
+            children={movieData?.director}
             {...getOverrideProps(overrides, "Information about this product")}
           ></Text>
         </Flex>
@@ -103,25 +106,6 @@ export default function CardC(props) {
           size="default"
           {...getOverrideProps(overrides, "Rating")}
         ></Rating>
-        <Text
-          fontFamily="Inter"
-          fontSize="32px"
-          fontWeight="700"
-          color="rgba(13,26,38,1)"
-          lineHeight="40px"
-          textAlign="left"
-          display="flex"
-          direction="column"
-          justifyContent="flex-start"
-          shrink="0"
-          alignSelf="stretch"
-          objectFit="cover"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="$99 USD"
-          {...getOverrideProps(overrides, "$99 USD")}
-        ></Text>
         <Button
           display="flex"
           gap="10px"

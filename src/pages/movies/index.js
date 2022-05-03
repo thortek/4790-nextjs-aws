@@ -6,6 +6,9 @@ import useSWR from "swr"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton, Snackbar } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useAuthenticator } from '@aws-amplify/ui-react'
+import { 
+  CardC 
+} from '../../ui-components'
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
 const MovieList = () => {
@@ -74,7 +77,7 @@ const MovieList = () => {
       </Head>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {movieList && movieList.map((movie) => (
-          <Card key={movie.id} sx={{ maxWidth: 300, m: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+/*           <Card key={movie.id} sx={{ maxWidth: 300, m: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
 
             <CardMedia component='img' image={movie.poster} title={movie.title} />
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -102,7 +105,8 @@ const MovieList = () => {
                 </IconButton>)}
               </CardActions>
             </Box>
-          </Card>
+          </Card> */
+          <CardC key={movie.id} movieData={movie}/>
         ))}
       </Box>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} message={snackBarMessage} severity={snackBarSeverity}/>
